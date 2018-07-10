@@ -1,6 +1,6 @@
 <template>
   <main>
-    <Header />
+    <Header :check="true" @check="saveDistricts"/>
     <section id="districts">
       <div
         :class="`zone ${selectedZone === index ? 'open' : ''}`"
@@ -97,6 +97,10 @@ export default {
           this.removeDistrict(item.id);
         });
       }
+    },
+    saveDistricts() {
+      this.$store.commit('SET_SELECTED_DISTRICTS', { payload: this.selectedDistricts });
+      this.$router.push('/profile');
     }
   }
 }
