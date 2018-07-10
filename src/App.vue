@@ -20,7 +20,7 @@ button {
 }
 
 body {
-  background: $grayLight;
+  background: $color_grayLight;
   height: 100%;
   font-size: 62.5%;
 }
@@ -32,11 +32,11 @@ img {
 
 #app {
   position: relative;
-  font-family: 'Roboto Slab', serif;
+  font-family: 'Raleway', sans-serif;
   text-align: center;
-  color:$black;
+  color: $color_gray;
   margin: 0 auto;
-  background: $white;
+  background: $color_white;
   max-width: 768px;
   min-height: 100%;
   overflow: hidden;
