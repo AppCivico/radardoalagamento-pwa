@@ -41,4 +41,8 @@ img {
   min-height: 100%;
   overflow: hidden;
 }
+
+main {
+  padding-bottom: 76px;
+}
 </style>
