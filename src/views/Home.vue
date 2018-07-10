@@ -40,6 +40,9 @@ export default {
   methods: {
     hideLauchScreen() {
       this.status = 'hide';
+      setTimeout(() => {
+        this.$router.push('districts');
+      }, 500);
     },
   }
 };
