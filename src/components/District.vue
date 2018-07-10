@@ -13,11 +13,21 @@ export default {
   name: 'District',
   props: {
     district: Object,
+    selected: Number,
   },
   data() {
     return {
       checkbox: false,
     };
+  },
+  watch: {
+    selected(val) {
+      if (val > -1) {
+        this.checkbox = true;
+      } else {
+        this.checkbox = false;
+      }
+    },
   },
   methods: {
     handleCheckbox() {
