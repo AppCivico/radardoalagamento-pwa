@@ -23,10 +23,18 @@
             <District
               v-for="district in zone.districts"
               :district="district"
+              :selected="selectedDistricts.findIndex(item => item === district.id)"
               :key="district.id"
               @add-district="addDistrict"
               @remove-district="removeDistrict"
             />
+            <li>
+              <div class="district__checkbox">
+                <input type="checkbox" :id="`districtAll__${zone.id}`" name="districtAll__checkbox" @change="toggleAll($event, zone.districts)">
+                <span></span>
+              </div>
+              <label :for="`districtAll__${zone.id}`">Seguir todos</label>
+            </li>
           </ul>
         </div>
       </div>
@@ -75,6 +83,19 @@ export default {
         this.selectedZone = null;
       } else {
         this.selectedZone = i;
+      }
+    },
+    toggleAll(event, districts) {
+      if (event.target.checked) {
+        districts.map(item => {
+          if (this.selectedDistricts.findIndex(a => a === item.id) === -1) {
+            this.addDistrict(item.id);
+          }
+        });
+      } else {
+        districts.map(item => {
+          this.removeDistrict(item.id);
+        });
       }
     }
   }
