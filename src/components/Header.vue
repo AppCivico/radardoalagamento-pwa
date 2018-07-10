@@ -1,12 +1,16 @@
 <template>
   <header id="header">
     <h2>{{ this.$route.name }}</h2>
+    <a v-if="check" href="#" @click.prevent="$emit('check')">check</a>
   </header>
 </template>
 
 <script>
 export default {
   name: 'Header',
+  props: {
+    check: Boolean,
+  }
 }
 </script>
 
