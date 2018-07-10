@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 import Home from './views/Home.vue';
-import About from './views/About.vue';
+import Districts from './views/Districts.vue';
 
 Vue.use(Router);
 
@@ -13,9 +13,9 @@ export default new Router({
       component: Home,
     },
     {
-      path: '/about',
-      name: 'about',
-      component: About,
+      path: '/districts',
+      name: 'Meus distritos',
+      component: Districts,
     },
   ],
   scrollBehavior(to, from, savedPosition) {
