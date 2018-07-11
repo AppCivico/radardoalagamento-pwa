@@ -76,4 +76,7 @@ main {
     background-color: $color_blue;
   }
 }
+.swal-button--cancel {
+  color: $color_white;
+}
 </style>
