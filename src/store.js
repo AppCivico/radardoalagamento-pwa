@@ -83,5 +83,27 @@ export default new Vuex.Store({
         );
       });
     },
+    UPDATE_DISTRICTS({ commit, state }, payload) {
+      return new Promise((resolve, reject) => {
+        axios({
+          method: 'POST',
+          url: `https://dtupa.eokoe.com/district/${payload.id}/${payload.action}?api_key=${state.apikey}`,
+          headers: { 'Content-Type': 'application/json' },
+        }).then(
+          (response) => {
+            resolve(response);
+            console.log('response', response);
+            // commit('SET_APIKEY', { res: response.data.api_key });
+            // commit('SET_USER', { res: data });
+            // localStorage.setItem('rdalgapk', response.data.api_key);
+            // localStorage.setItem('rdalgus', JSON.stringify(data));
+          },
+          (err) => {
+            reject(err);
+            console.error('err', err);
+          },
+        );
+      });
+    },
   },
 });
