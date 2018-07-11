@@ -98,12 +98,9 @@ export default {
     loadAlerts(type) {
       this.$store.dispatch(type)
         .then(() => {
-          console.log('lodou');
           if (type === 'GET_ALERTS') {
-            console.log('alerts', this.alerts);
             this.selectedAlerts = this.alerts;
           } else {
-            console.log('alertsCity', this.alertsCity);
             this.selectedAlerts = this.alertsCity;
           }
         })
@@ -114,7 +111,6 @@ export default {
     changeType(type) {
       this.type = type;
       if (type === 'me') {
-        console.log('dou pra me')
         if (this.alerts.length < 1) {
           this.loadAlerts('GET_ALERTS');
         } else {
