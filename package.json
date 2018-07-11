@@ -13,6 +13,7 @@
     "sweetalert": "^2.1.0",
     "vue": "^2.5.16",
     "vue-router": "^3.0.1",
+    "vue-the-mask": "^0.11.1",
     "vuex": "^3.0.1"
   },
   "devDependencies": {
