@@ -4,9 +4,9 @@
     <section id="options">
       <nav>
         <ul class="options__menu">
-          <li><router-link to="/terms">Termos se Serviço</router-link></li>
+          <li><router-link to="/terms">Termos de Serviço</router-link></li>
           <li><router-link to="/privacy">Política de Privacidade</router-link></li>
-          <li class="help"><router-link to="/terms">Ajuda</router-link></li>
+          <li class="help"><router-link to="/help">Ajuda</router-link></li>
         </ul>
       </nav>
     </section>
@@ -59,6 +59,21 @@ export default {
 .options__menu a {
   color: inherit;
   text-decoration: none;
+  display: block;
+}
+.options__menu-clean li {
+  background: none;
+  padding-left: $gutter;
+}
+#options article {
+  font-size: 2em;
+  font-weight: 300;
+  text-align: left;
+  line-height: 1.5em;
+  padding: $gutter $gutter;
+}
+#options article p {
+  margin-bottom: $gutter / 2;
 }
 </style>
 
