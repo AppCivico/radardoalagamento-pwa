@@ -59,9 +59,11 @@ export default {
   mounted() {
     this.$store.dispatch('GET_ZONES');
     this.checkUser();
-    if (this.userType === 'registered') {
-      this.selectedDistricts = this.alreadySelected;
-    }
+    setTimeout(() => {
+      if (this.userType === 'registered') {
+        this.selectedDistricts = this.alreadySelected;
+      }
+    }, 100);
   },
   computed: {
     zones() {
@@ -87,10 +89,20 @@ export default {
     },
     addDistrict(id) {
       this.selectedDistricts.push(id);
+      if (this.userType === 'registered') {
+        this.updateUser('follow', id);
+      }
     },
     removeDistrict(id) {
       const index = this.selectedDistricts.findIndex(item => item === id);
-			this.selectedDistricts.splice(index, 1);
+      this.selectedDistricts.splice(index, 1);
+      if (this.userType === 'registered') {
+        this.updateUser('unfollow', id);
+      }
+    },
+    updateUser(action, id) {
+      const payload = { action, id };
+      this.$store.dispatch('UPDATE_DISTRICTS', payload);
     },
     toggleZone(i) {
       if (this.selectedZone === i) {
