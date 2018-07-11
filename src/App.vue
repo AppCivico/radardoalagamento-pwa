@@ -45,4 +45,16 @@ img {
 main {
   padding-bottom: 76px;
 }
+
+.swal-modal {
+  font-family: 'Raleway', sans-serif;
+  color: $color_gray;
+}
+.swal-button {
+  background-color: $color_blue;
+
+  &:active {
+    background-color: $color_blue;
+  }
+}
 </style>
