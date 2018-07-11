@@ -3,6 +3,7 @@ import Router from 'vue-router';
 import Home from './views/Home.vue';
 import Districts from './views/Districts.vue';
 import Profile from './views/Profile.vue';
+import Alerts from './views/Alerts.vue';
 
 Vue.use(Router);
 
@@ -27,6 +28,11 @@ export default new Router({
       path: '/profile',
       name: 'Perfil',
       component: Profile,
+    },
+    {
+      path: '/alerts',
+      name: 'Alertas',
+      component: Alerts,
     },
   ],
   scrollBehavior(to, from, savedPosition) {
