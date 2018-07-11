@@ -4,6 +4,7 @@
     <section id="new-alert">
       <h2>Enviar novo alerta</h2>
       <form @submit.prevent="submitForm('new')" v-if="userType === 'registered'">
+        <div id="map" class="new-alert__map"></div>
         <label for="description">
           <input type="text" v-model="description" name="description" placeholder="Descrição">
           <span class="new-alert__helper">Essa será a mensagem exibida na notificação, prefira mensagens curtas e objetivas.</span>
@@ -47,6 +48,8 @@ export default {
       },
       lat: '',
       lng: '',
+      map: {},
+      infoWindow: {},
     };
   },
   mounted() {
@@ -62,8 +65,19 @@ export default {
         }
       });
     }
+    this.initMap();
   },
   methods: {
+    initMap() {
+      const position = { lat: -23.576159600000004, lng: -46.646406899999995 };
+      this.$nextTick(() => {
+        this.map = new google.maps.Map(document.getElementById('map'), {
+          center: position,
+          zoom: 10,
+        });
+        let marker = new google.maps.Marker({position, map: this.map});
+      });
+    },
     checkUser() {
       if (localStorage.getItem('rdalgus') !== null) {
         this.userType = 'registered';
@@ -72,9 +86,15 @@ export default {
     useGeolocation() {
       if ('geolocation' in navigator) {
         navigator.geolocation.getCurrentPosition((location) => {
-          console.log('location', location);
           this.lat = location.coords.latitude;
           this.lng = location.coords.longitude;
+          var position = {
+            lat: location.coords.latitude,
+            lng: location.coords.longitude,
+          };
+
+          this.map.setCenter(position);
+          let marker = new google.maps.Marker({position, map: this.map});
         });
       } else {
         swal('Ops! Seu navegador não suporta geolocalização, utilize o mapa');
@@ -88,10 +108,8 @@ export default {
         lng: this.lng,
         lat: this.lat,
       }
-      console.log('data', data);
       const validation = this.validate(data);
       if (validation.status) {
-        console.log('data 2', data);
         this.$store.dispatch('NEW_ALERT', data)
           .then(() => {
             swal('Alerta enviado com sucesso!');
@@ -189,6 +207,11 @@ export default {
   font-size: 1.2em;
   display: block;
   margin-top: $gutter / 4;
+}
+.new-alert__map {
+  width: 100%;
+  height: 200px;
+  margin-bottom: $gutter;
 }
 </style>
 
