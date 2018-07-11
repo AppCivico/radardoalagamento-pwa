@@ -4,6 +4,7 @@
     <h2>{{ this.$route.name }}</h2>
     <a v-if="check" href="#" class="header__check" @click.prevent="$emit('check')">Confirmar</a>
     <a v-if="edit" href="#" class="header__edit" @click.prevent="$emit('edit')">Editar</a>
+    <a v-if="refresh" href="#" class="header__refresh" @click.prevent="$emit('refresh')">Recarregar</a>
   </header>
 </template>
 
@@ -14,6 +15,7 @@ export default {
     check: Boolean,
     edit: Boolean,
     back: Boolean,
+    refresh: Boolean,
   }
 }
 </script>
@@ -21,7 +23,7 @@ export default {
 <style lang="scss">
 #header {
   overflow: hidden;
-  padding: $gutter * 1.5 $gutter;
+  padding: $gutter * 1.5 $gutter * 2;
   background-color: $color_blue;
   text-align: left;
 }
@@ -62,6 +64,16 @@ export default {
   width: 25px;
   height: 25px;
   margin-right: $gutter;
+}
+.header__refresh {
+  display: block;
+  float: right;
+  font-size: 0;
+  background-image: url('../assets/images/refresh_icon.png');
+  background-repeat: no-repeat;
+  background-size: 100% auto;
+  width: 30px;
+  height: 30px;
 }
 </style>
 
