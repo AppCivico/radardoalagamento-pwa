@@ -5,17 +5,18 @@ import { register } from 'register-service-worker';
 let swRegistration = '';
 
 function initialiseUI() {
-  swRegistration.pushManager.getSubscription()
-    .then((subscription) => {
-      console.log('sub', subscription);
-    });
+  swRegistration.pushManager.getSubscription().then((subscription) => {
+    console.log('sub', subscription);
+  });
 }
 
 if (process.env.NODE_ENV === 'production') {
   register(`${process.env.BASE_URL}service-worker.js`, {
-    ready() {
+    ready(swReg) {
       console.log('App is being served from cache by a service worker.\n' +
           'For more details, visit https://goo.gl/AFskqB');
+      swRegistration = swReg;
+      initialiseUI();
     },
     cached() {
       console.log('Content has been cached for offline use.');
@@ -29,10 +30,5 @@ if (process.env.NODE_ENV === 'production') {
     error(error) {
       console.error('Error during service worker registration:', error);
     },
-  }).then((swReg) => {
-    console.log('Service Worker is registered', swReg);
-
-    swRegistration = swReg;
-    initialiseUI();
   });
 }
