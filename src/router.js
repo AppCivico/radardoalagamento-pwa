@@ -36,7 +36,7 @@ export default new Router({
     },
     {
       path: '/options',
-      name: 'Configurações',
+      name: 'Ajuda',
       component: () => import('./views/Options.vue'),
     },
     {
