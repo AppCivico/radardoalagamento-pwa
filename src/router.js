@@ -4,6 +4,7 @@ import Home from './views/Home.vue';
 import Districts from './views/Districts.vue';
 import Profile from './views/Profile.vue';
 import Alerts from './views/Alerts.vue';
+import Options from './views/Options.vue';
 
 Vue.use(Router);
 
@@ -33,6 +34,11 @@ export default new Router({
       path: '/alerts',
       name: 'Alertas',
       component: Alerts,
+    },
+    {
+      path: '/options',
+      name: 'Configurações',
+      component: Options,
     },
   ],
   scrollBehavior(to, from, savedPosition) {
