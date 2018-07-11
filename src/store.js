@@ -11,6 +11,8 @@ export default new Vuex.Store({
     selectedDistricts: [],
     apikey: '',
     user: {},
+    alerts: [],
+    alertsCity: [],
   },
   mutations: {
     SET_ZONES(state, { res }) {
@@ -24,6 +26,12 @@ export default new Vuex.Store({
     },
     SET_USER(state, { res }) {
       state.user = res;
+    },
+    SET_ALERTS_CITY(state, { res }) {
+      state.alertsCity = res.results;
+    },
+    SET_ALERTS(state, { res }) {
+      state.alerts = res.results;
     },
   },
   actions: {
@@ -87,9 +95,7 @@ export default new Vuex.Store({
       return new Promise((resolve, reject) => {
         axios({
           method: 'POST',
-          url: `https://dtupa.eokoe.com/district/${payload.id}/${payload.action}?api_key=${
-            state.apikey
-          }`,
+          url: `${config.api}/district/${payload.id}/${payload.action}?api_key=${state.apikey}`,
           headers: { 'Content-Type': 'application/json' },
         }).then(
           (response) => {
@@ -110,6 +116,34 @@ export default new Vuex.Store({
           (err) => {
             reject(err);
             console.error('err', err);
+          },
+        );
+      });
+    },
+    GET_ALERTS_CITY({ commit, state }) {
+      return new Promise((resolve, reject) => {
+        axios.get(`${config.api}/alert/all?api_key=${state.apikey}`).then(
+          (response) => {
+            commit('SET_ALERTS_CITY', { res: response.data });
+            resolve();
+          },
+          (err) => {
+            reject(err.response);
+            console.error(err);
+          },
+        );
+      });
+    },
+    GET_ALERTS({ commit, state }) {
+      return new Promise((resolve, reject) => {
+        axios.get(`${config.api}/alert?api_key=${state.apikey}`).then(
+          (response) => {
+            commit('SET_ALERTS', { res: response.data });
+            resolve();
+          },
+          (err) => {
+            reject(err.response);
+            console.error(err);
           },
         );
       });
