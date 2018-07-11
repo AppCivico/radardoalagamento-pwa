@@ -62,6 +62,8 @@ export default {
         } else {
           this.movement = `-${this.activeCard * (100 / 2)}%`;
         }
+      } else {
+        this.skip();
       }
     },
     swipeCard(movement) {
