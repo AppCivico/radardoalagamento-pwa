@@ -5,6 +5,9 @@ import Districts from './views/Districts.vue';
 import Profile from './views/Profile.vue';
 import Alerts from './views/Alerts.vue';
 import Options from './views/Options.vue';
+import Terms from './views/Terms.vue';
+import Privacy from './views/Privacy.vue';
+import Help from './views/Help.vue';
 
 Vue.use(Router);
 
@@ -39,6 +42,21 @@ export default new Router({
       path: '/options',
       name: 'Configurações',
       component: Options,
+    },
+    {
+      path: '/terms',
+      name: 'Termos de Serviço',
+      component: Terms,
+    },
+    {
+      path: '/privacy',
+      name: 'Política de privacidade',
+      component: Privacy,
+    },
+    {
+      path: '/help',
+      name: 'Ajuda',
+      component: Help,
     },
   ],
   scrollBehavior(to, from, savedPosition) {
