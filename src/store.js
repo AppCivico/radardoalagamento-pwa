@@ -148,5 +148,23 @@ export default new Vuex.Store({
         );
       });
     },
+    REPORT_PROBLEM({ commit }, data) {
+      return new Promise((resolve, reject) => {
+        axios({
+          method: 'POST',
+          url: `${config.api}/app-report`,
+          headers: { 'Content-Type': 'application/json' },
+          data,
+        }).then(
+          (response) => {
+            resolve(response);
+          },
+          (err) => {
+            reject(err);
+            console.error('err', err);
+          },
+        );
+      });
+    },
   },
 });
