@@ -4,6 +4,7 @@
     <section id="new-alert">
       <h2>Enviar novo alerta</h2>
       <form @submit.prevent="submitForm('new')" v-if="userType === 'registered'">
+        <input type="text" id="searchTextField" placeholder="Localização">
         <div id="map" class="new-alert__map"></div>
         <label for="description">
           <input type="text" v-model="description" name="description" placeholder="Descrição">
@@ -49,7 +50,8 @@ export default {
       lat: '',
       lng: '',
       map: {},
-      infoWindow: {},
+      autocomplete: {},
+      marker: {},
     };
   },
   mounted() {
@@ -75,8 +77,32 @@ export default {
           center: position,
           zoom: 10,
         });
-        let marker = new google.maps.Marker({position, map: this.map});
+        this.marker = new google.maps.Marker({position, map: this.map});
+        this.initAutocomplete();
       });
+    },
+    initAutocomplete() {
+      var defaultBounds = new google.maps.LatLngBounds(new google.maps.LatLng(-23.576159600000004, -46.646406899999995));
+
+      var input = document.getElementById('searchTextField');
+      var options = {
+        bounds: defaultBounds,
+        types: ['geocode'],
+      };
+
+      this.autocomplete = new google.maps.places.Autocomplete(input, options);
+      this.autocomplete.addListener('place_changed', this.updateMap);
+    },
+    updateMap() {
+      var place = this.autocomplete.getPlace();
+
+      if (place.geometry) {
+        this.map.panTo(place.geometry.location);
+        this.map.setZoom(15);
+        this.marker = new google.maps.Marker({position: place.geometry.location, map: this.map});
+      } else {
+        swal('Localização não encontrada');
+      }
     },
     checkUser() {
       if (localStorage.getItem('rdalgus') !== null) {
@@ -94,7 +120,7 @@ export default {
           };
 
           this.map.setCenter(position);
-          let marker = new google.maps.Marker({position, map: this.map});
+          this.marker = new google.maps.Marker({position, map: this.map});
         });
       } else {
         swal('Ops! Seu navegador não suporta geolocalização, utilize o mapa');
@@ -211,7 +237,7 @@ export default {
 .new-alert__map {
   width: 100%;
   height: 200px;
-  margin-bottom: $gutter;
+  margin: $gutter 0;
 }
 </style>
 
