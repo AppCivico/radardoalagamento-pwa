@@ -4,11 +4,6 @@ import Home from './views/Home.vue';
 import Districts from './views/Districts.vue';
 import Profile from './views/Profile.vue';
 import Alerts from './views/Alerts.vue';
-import Options from './views/Options.vue';
-import Terms from './views/Terms.vue';
-import Privacy from './views/Privacy.vue';
-import Help from './views/Help.vue';
-import NewAlert from './views/NewAlert.vue';
 
 Vue.use(Router);
 
@@ -42,27 +37,27 @@ export default new Router({
     {
       path: '/options',
       name: 'Configurações',
-      component: Options,
+      component: () => import('./views/Options.vue'),
     },
     {
       path: '/terms',
       name: 'Termos de Serviço',
-      component: Terms,
+      component: () => import('./views/Terms.vue'),
     },
     {
       path: '/privacy',
       name: 'Política de privacidade',
-      component: Privacy,
+      component: () => import('./views/Privacy.vue'),
     },
     {
       path: '/help',
       name: 'Ajuda',
-      component: Help,
+      component: () => import('./views/Help.vue'),
     },
     {
       path: '/new-alert',
       name: 'Novo alerta',
-      component: NewAlert,
+      component: () => import('./views/NewAlert.vue'),
     },
   ],
   scrollBehavior(to, from, savedPosition) {
