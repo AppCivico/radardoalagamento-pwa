@@ -4,6 +4,25 @@
   </div>
 </template>
 
+<script>
+export default {
+  name: 'App',
+  mounted() {
+    const apiKey = localStorage.getItem('rdalgapk');
+    const user = localStorage.getItem('rdalgus');
+    if (apiKey) {
+      this.$store.commit('SET_APIKEY', { res: apiKey });
+    }
+    if (user) {
+      const parsedUser = JSON.parse(user);
+      this.$store.commit('SET_USER', { res: parsedUser });
+      this.$store.commit('SET_SELECTED_DISTRICTS', { payload: parsedUser.districts });
+    }
+  }
+}
+</script>
+
+
 <style lang="scss">
 * {
   box-sizing: border-box;
