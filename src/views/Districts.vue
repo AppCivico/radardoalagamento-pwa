@@ -58,10 +58,17 @@ export default {
   },
   mounted() {
     this.$store.dispatch('GET_ZONES');
+    this.checkUser();
+    if (this.userType === 'registered') {
+      this.selectedDistricts = this.alreadySelected;
+    }
   },
   computed: {
     zones() {
       return this.$store.state.zones.reverse();
+    },
+    alreadySelected() {
+      return this.$store.state.selectedDistricts;
     },
   },
   data() {
@@ -69,9 +76,15 @@ export default {
       selectedDistricts: [],
       colors: ['#93dcdf', '#48ced8', '#10a1ba', '#0f718d', '#004e70'],
       selectedZone: null,
+      userType: '',
     };
   },
   methods: {
+    checkUser() {
+      if (localStorage.getItem('rdalgus') !== null) {
+        this.userType = 'registered';
+      }
+    },
     addDistrict(id) {
       this.selectedDistricts.push(id);
     },
@@ -104,7 +117,7 @@ export default {
         this.$store.commit('SET_SELECTED_DISTRICTS', { payload: this.selectedDistricts });
         this.$router.push('/profile');
       } else {
-        swal('Ops, você não selecionou nenhum distrito.');
+        swal('Ops! você não selecionou nenhum distrito.');
       }
     }
   }
