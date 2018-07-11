@@ -1,5 +1,6 @@
 <template>
   <header id="header">
+    <a v-if="back" href="#" class="header__back" @click.prevent="$emit('back')">Voltar</a>
     <h2>{{ this.$route.name }}</h2>
     <a v-if="check" href="#" class="header__check" @click.prevent="$emit('check')">Confirmar</a>
     <a v-if="edit" href="#" class="header__edit" @click.prevent="$emit('edit')">Editar</a>
@@ -12,6 +13,7 @@ export default {
   props: {
     check: Boolean,
     edit: Boolean,
+    back: Boolean,
   }
 }
 </script>
@@ -49,6 +51,17 @@ export default {
   background-size: 100% auto;
   width: 30px;
   height: 30px;
+}
+.header__back {
+  display: block;
+  float: left;
+  font-size: 0;
+  background-image: url('../assets/images/back-icon.png');
+  background-repeat: no-repeat;
+  background-size: 100% auto;
+  width: 25px;
+  height: 25px;
+  margin-right: $gutter;
 }
 </style>
 
