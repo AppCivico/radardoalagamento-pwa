@@ -9,14 +9,21 @@ export default new Vuex.Store({
   state: {
     zones: [],
     selectedDistricts: [],
+    apikey: '',
+    user: {},
   },
   mutations: {
     SET_ZONES(state, { res }) {
       state.zones = res.results;
     },
     SET_SELECTED_DISTRICTS(state, { payload }) {
-      console.log('pay', payload);
       state.selectedDistricts = payload;
+    },
+    SET_APIKEY(state, { res }) {
+      state.apikey = res;
+    },
+    SET_USER(state, { res }) {
+      state.user = res;
     },
   },
   actions: {
@@ -30,6 +37,48 @@ export default new Vuex.Store({
           (err) => {
             reject(err.response);
             console.error(err);
+          },
+        );
+      });
+    },
+    REGISTER_USER({ commit }, data) {
+      return new Promise((resolve, reject) => {
+        axios({
+          method: 'POST',
+          url: `${config.api}/signup`,
+          headers: { 'Content-Type': 'application/json' },
+          data,
+        }).then(
+          (response) => {
+            resolve(response);
+            commit('SET_APIKEY', { res: response.data.api_key });
+            commit('SET_USER', { res: data });
+            localStorage.setItem('rdalgapk', response.data.api_key);
+            localStorage.setItem('rdalgus', JSON.stringify(data));
+          },
+          (err) => {
+            reject(err);
+            console.error('err', err);
+          },
+        );
+      });
+    },
+    EDIT_USER({ commit, state }, data) {
+      return new Promise((resolve, reject) => {
+        axios({
+          method: 'PUT',
+          url: `${config.api}/me?api_key=${state.apikey}`,
+          headers: { 'Content-Type': 'application/json' },
+          data,
+        }).then(
+          (response) => {
+            resolve(response);
+            commit('SET_USER', { res: data });
+            localStorage.setItem('rdalgus', JSON.stringify(data));
+          },
+          (err) => {
+            reject(err);
+            console.error('err', err);
           },
         );
       });
