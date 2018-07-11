@@ -1,11 +1,12 @@
 <template>
   <main>
-    <Header />
+    <Header :refresh="true" @refresh="refresh"/>
     <section id="alerts">
       <ul class="alerts__type">
         <li @click="changeType('me')" :class="this.type === 'me' ? 'active' : ''">Meus alertas</li>
         <li @click="changeType('city')" :class="this.type === 'city' ? 'active' : ''">Alertas da cidade</li>
       </ul>
+      <a class="alerts_new-alert" href="#" @click.prevent="$router.push('/new-alert')">Enviar um alerta</a>
       <ul class="alerts__list" v-if="selectedAlerts.length > 0">
         <li class="alerts__item" v-for="alert in selectedAlerts" :key="alert.id">
           <span class="alert__time">{{ formatDate(alert.created_at) }}</span>
@@ -75,6 +76,13 @@ export default {
     },
   },
   methods: {
+    refresh() {
+      if (this.type === 'me') {
+        this.loadAlerts('GET_ALERTS');
+      } else {
+        this.loadAlerts('GET_ALERTS_CITY');
+      }
+    },
     formatDate(date) {
       if (date) {
         const day = date
@@ -225,6 +233,16 @@ export default {
   font-size: 1.2em;
   margin-bottom: $gutter / 3;
   display: block;
+}
+.alerts_new-alert {
+  width: 100%;
+  display: block;
+  background-color: #10a1ba;
+  color: $color_white;
+  text-decoration: none;
+  font-size: 2em;
+  font-weight: 300;
+  padding: $gutter / 2 $gutter;
 }
 </style>
 
