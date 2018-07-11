@@ -1,7 +1,8 @@
 <template>
   <header id="header">
     <h2>{{ this.$route.name }}</h2>
-    <a v-if="check" href="#" class="header__check" @click.prevent="$emit('check')">check</a>
+    <a v-if="check" href="#" class="header__check" @click.prevent="$emit('check')">Confirmar</a>
+    <a v-if="edit" href="#" class="header__edit" @click.prevent="$emit('edit')">Editar</a>
   </header>
 </template>
 
@@ -10,6 +11,7 @@ export default {
   name: 'Header',
   props: {
     check: Boolean,
+    edit: Boolean,
   }
 }
 </script>
@@ -37,6 +39,16 @@ export default {
   width: 30px;
   height: 23px;
   margin-top: 3px;
+}
+.header__edit {
+  display: block;
+  float: right;
+  font-size: 0;
+  background-image: url('../assets/images/edit.png');
+  background-repeat: no-repeat;
+  background-size: 100% auto;
+  width: 30px;
+  height: 30px;
 }
 </style>
 
