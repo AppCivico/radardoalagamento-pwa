@@ -84,11 +84,19 @@ export default {
   path {
     fill: $color_gray;
   }
+
+  @media (min-height: 550px) {
+    max-width: 25px;
+  }
 }
 .footer__nav a {
   color: inherit;
   text-decoration: none;
   font-size: 1.2em;
+
+  @media (min-height: 550px) {
+    font-size: 1em;
+  }
 }
 .footer__nav h3 {
   font-weight: 400;

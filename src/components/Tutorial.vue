@@ -190,13 +190,27 @@ export default {
   &:nth-child(3) {
     background-image: url('../assets/images/bg_tutorial_3.png');
   }
+
+  @media (min-height: 550px) {
+    img {
+      max-width: 70%;
+    }
+  }
 }
 .tutorial__item h2 {
   font-size: 2.6em;
   margin: $gutter 0;
+
+  @media (min-height: 550px) {
+    font-size: 2.2em;
+  }
 }
 .tutorial__item p {
   font-size: 2em;
+
+  @media (min-height: 550px) {
+    font-size: 1.7em;
+  }
 }
 .tutorial__footer {
   position: absolute;
