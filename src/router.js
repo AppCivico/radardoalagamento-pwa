@@ -8,6 +8,7 @@ import Options from './views/Options.vue';
 import Terms from './views/Terms.vue';
 import Privacy from './views/Privacy.vue';
 import Help from './views/Help.vue';
+import NewAlert from './views/NewAlert.vue';
 
 Vue.use(Router);
 
@@ -57,6 +58,11 @@ export default new Router({
       path: '/help',
       name: 'Ajuda',
       component: Help,
+    },
+    {
+      path: '/new-alert',
+      name: 'Novo alerta',
+      component: NewAlert,
     },
   ],
   scrollBehavior(to, from, savedPosition) {
