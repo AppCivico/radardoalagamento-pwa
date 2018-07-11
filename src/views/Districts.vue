@@ -47,6 +47,7 @@
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import District from '@/components/District';
+import swal from 'sweetalert';
 
 export default {
   name: 'Districts',
@@ -99,8 +100,12 @@ export default {
       }
     },
     saveDistricts() {
-      this.$store.commit('SET_SELECTED_DISTRICTS', { payload: this.selectedDistricts });
-      this.$router.push('/profile');
+      if (this.selectedDistricts.length > 0) {
+        this.$store.commit('SET_SELECTED_DISTRICTS', { payload: this.selectedDistricts });
+        this.$router.push('/profile');
+      } else {
+        swal('Ops, você não selecionou nenhum distrito.');
+      }
     }
   }
 }
