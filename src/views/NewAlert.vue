@@ -95,8 +95,9 @@ export default {
     },
     updateMap() {
       var place = this.autocomplete.getPlace();
-
       if (place.geometry) {
+        this.lat = place.geometry.location.lat();
+        this.lng = place.geometry.location.lng();
         this.map.panTo(place.geometry.location);
         this.map.setZoom(15);
         this.marker = new google.maps.Marker({position: place.geometry.location, map: this.map});
