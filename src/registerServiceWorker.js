@@ -5,6 +5,7 @@ import { register } from 'register-service-worker';
 let swRegistration = '';
 
 function initialiseUI() {
+  console.log('tentativa se push manager');
   swRegistration.pushManager.getSubscription().then((subscription) => {
     console.log('sub', subscription);
   });
