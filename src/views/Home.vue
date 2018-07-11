@@ -18,6 +18,15 @@ export default {
       status: 'show',
     }
   },
+  mounted() {
+    const tutorial = localStorage.getItem('rdalgtut');
+    if (tutorial === 'done') {
+      this.status = 'hide';
+      this.$router.push('/alerts')
+    } else {
+      localStorage.setItem('rdalgtut', 'done');
+    }
+  },
   beforeRouteEnter (to, from, next) {
     if (from.name !== null) {
       next((vm) => {
