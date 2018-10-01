@@ -101,8 +101,8 @@ export default {
             .then(() => {
               this.$router.push('/alerts');
             })
-            .catch(() => {
-              swal('Ocorreu um erro durante seu cadastro, tente novamente.');
+            .catch((error) => {
+              swal(error.response.data[0].message);
             });
         } else if (type === 'edit') {
           this.$store.dispatch('EDIT_USER', user)
