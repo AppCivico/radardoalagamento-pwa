@@ -24,13 +24,13 @@ export default {
 #header {
   overflow: hidden;
   padding: $gutter * 1.5 $gutter * 2;
-  background-color: $color_blueDark;
+  background-color: $color_blue;
   text-align: left;
 }
 #header h2 {
   font-size: 2.2em;
   font-weight: 400;
-  color: $color_white;
+  color: $color_blackLight;
   float: left;
 }
 .header__check {

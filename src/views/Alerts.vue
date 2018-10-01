@@ -151,7 +151,7 @@ export default {
   width: 50%;
   float: left;
   display: block;
-  color: $color_white;
+  color: $color_blackLight;
   font-size: 2em;
   font-weight: 300;
   padding: 0 0 $gutter;

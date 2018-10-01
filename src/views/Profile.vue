@@ -101,7 +101,8 @@ export default {
             .then(() => {
               this.$router.push('/alerts');
             })
-            .catch(() => {
+            .catch((err) => {
+              console.log(err.error);
               swal('Ocorreu um erro durante seu cadastro, tente novamente.');
             });
         } else if (type === 'edit') {
