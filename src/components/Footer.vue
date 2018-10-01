@@ -68,10 +68,10 @@ export default {
   color: $color_gray;
 
   &.active {
-    color: $color_blue;
+    color: $color_blueDark;
 
     path {
-      fill: $color_blue;
+      fill: $color_blueDark;
     }
   }
 }

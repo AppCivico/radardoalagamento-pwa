@@ -76,7 +76,9 @@ export default {
   data() {
     return {
       selectedDistricts: [],
-      colors: ['#93dcdf', '#48ced8', '#10a1ba', '#0f718d', '#004e70'],
+      // colors: ['#93dcdf', '#48ced8', '#10a1ba', '#0f718d', '#004e70'],
+      // colors: ['#187f7f', '#177a7a', '#177676', '#167272', '#156e6e'],
+      colors: ['#167272', '#146969', '#126161', '#115858', '#0f5050'],
       selectedZone: null,
       userType: '',
     };

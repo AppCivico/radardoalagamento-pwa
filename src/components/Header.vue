@@ -24,7 +24,7 @@ export default {
 #header {
   overflow: hidden;
   padding: $gutter * 1.5 $gutter * 2;
-  background-color: $color_blue;
+  background-color: $color_blueDark;
   text-align: left;
 }
 #header h2 {
