@@ -159,7 +159,7 @@ export default {
   transition: border 300ms;
 
   &.active {
-    border-bottom: 4px solid $color_blueDark;
+    border-bottom: 4px solid lighten($color_blueDark, 15%);
   }
 }
 .alerts__empty {
@@ -176,6 +176,7 @@ export default {
 }
 .alerts__empty h2 {
   font-size: 2.6em;
+  color: $color_blackLight;
   margin: $gutter * 2 0;
 }
 .alerts__list {
@@ -237,7 +238,7 @@ export default {
 .alerts_new-alert {
   width: 100%;
   display: block;
-  background-color: #10a1ba;
+  background-color: $color_blueDark;
   color: $color_white;
   text-decoration: none;
   font-size: 2em;
