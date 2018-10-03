@@ -20,26 +20,20 @@ export default {
     }
 
     const OneSignal = window.OneSignal || [];
+
     OneSignal.push(() => {
-      // OneSignal.on('subscriptionChange', (isSubscribed) => {
-      //   console.log('The users subscription state is now:', isSubscribed);
-      //   OneSignal.push(() => {
-      //     OneSignal.getUserId((userId) => {
-      //       console.log('OneSignal User ID:', userId);
-      //       this.$store.commit('SET_ONESIGNAL_USER_ID', userId);
-      //     });
-      //   });
-      // });
+      OneSignal.on('subscriptionChange', (isSubscribed) => {
+        console.log("The user's subscription state is now:", isSubscribed);
+        OneSignal.push(() => {
+          OneSignal.getUserId((userId) => {
+            console.log('OneSignal User ID:', userId);
+            this.$store.commit('SET_ONESIGNAL_USER_ID', userId);
+          });
+        });
+      });
+
       OneSignal.init({
         appId: '7945e8d5-d196-43af-bca1-b3d0b6224b96',
-      });
-      window.plugins.OneSignal.addSubscriptionObserver((state) => {
-        if (!state.from.subscribed && state.to.subscribed) {
-          console.log('Subscribed for OneSignal push notifications!');
-          // get player ID
-          console.log(state.to.userId);
-        }
-        console.log(`Push Subscription state changed: ${JSON.stringify(state)}`);
       });
     });
   },
