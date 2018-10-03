@@ -14,7 +14,7 @@ export default new Vuex.Store({
     alerts: [],
     alertsCity: [],
     oneSignalUserId: String,
-    oneSignalUserIsSubscribed: false,
+    oneSignalUserIsSubscribed: true,
   },
   mutations: {
     SET_ZONES(state, { res }) {
