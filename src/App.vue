@@ -18,24 +18,6 @@ export default {
       this.$store.commit('SET_USER', { res: parsedUser });
       this.$store.commit('SET_SELECTED_DISTRICTS', { payload: parsedUser.districts });
     }
-
-    const OneSignal = window.OneSignal || [];
-
-    OneSignal.push(() => {
-      OneSignal.on('subscriptionChange', (isSubscribed) => {
-        console.log("The user's subscription state is now:", isSubscribed);
-        OneSignal.push(() => {
-          OneSignal.getUserId((userId) => {
-            console.log('OneSignal User ID:', userId);
-            this.$store.commit('SET_ONESIGNAL_USER_ID', userId);
-          });
-        });
-      });
-
-      OneSignal.init({
-        appId: '7945e8d5-d196-43af-bca1-b3d0b6224b96',
-      });
-    });
   },
 };
 </script>
