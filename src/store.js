@@ -13,6 +13,8 @@ export default new Vuex.Store({
     user: {},
     alerts: [],
     alertsCity: [],
+    oneSignalUserId: String,
+    oneSignalUserIsSubscribed: false,
   },
   mutations: {
     SET_ZONES(state, { res }) {
@@ -33,6 +35,12 @@ export default new Vuex.Store({
     SET_ALERTS(state, { res }) {
       state.alerts = res.results;
     },
+    SET_ONESIGNAL_USER_ID(state, oneSignalUserId) {
+      state.oneSignalUserId = oneSignalUserId;
+    },
+    SET_ONESIGNAL_USER_IS_SUBSCRIBED(state, oneSignalUserIsSubscribed) {
+      state.oneSignalUserIsSubscribed = oneSignalUserIsSubscribed;
+    },
   },
   actions: {
     GET_ZONES({ commit }) {
@@ -49,13 +57,17 @@ export default new Vuex.Store({
         );
       });
     },
-    REGISTER_USER({ commit }, data) {
+    REGISTER_USER({ state, commit }, data) {
+      const newData = { ...data };
+      newData.push_token = state.oneSignalUserId;
+      newData.push_token_status = state.oneSignalUserIsSubscribed;
       return new Promise((resolve, reject) => {
+        console.log('test');
         axios({
           method: 'POST',
           url: `${config.api}/signup`,
           headers: { 'Content-Type': 'application/json' },
-          data,
+          data: newData,
         }).then(
           (response) => {
             resolve(response);
