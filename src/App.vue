@@ -18,8 +18,15 @@ export default {
       this.$store.commit('SET_USER', { res: parsedUser });
       this.$store.commit('SET_SELECTED_DISTRICTS', { payload: parsedUser.districts });
     }
-  }
-}
+
+    const OneSignal = window.OneSignal || [];
+    OneSignal.push(() => {
+      OneSignal.init({
+        appId: '7945e8d5-d196-43af-bca1-b3d0b6224b96',
+      });
+    });
+  },
+};
 </script>
 
 
