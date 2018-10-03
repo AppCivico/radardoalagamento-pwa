@@ -30,7 +30,7 @@ export default {
 #header h2 {
   font-size: 2.2em;
   font-weight: 400;
-  color: $color_white;
+  color: $color_blackLight;
   float: left;
 }
 .header__check {

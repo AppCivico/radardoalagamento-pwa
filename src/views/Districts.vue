@@ -76,7 +76,7 @@ export default {
   data() {
     return {
       selectedDistricts: [],
-      colors: ['#93dcdf', '#48ced8', '#10a1ba', '#0f718d', '#004e70'],
+      colors: ['#daf2f2', '#c5e9ea', '#a9dbdf', '#7ecdd8', '#599fb9'],
       selectedZone: null,
       userType: '',
     };
@@ -167,6 +167,7 @@ export default {
   width: 100%;
   padding: $gutter;
   text-align: left;
+  color: $color_blackLight;
 }
 .zone__header .zone__header__image {
   float: left;
@@ -193,6 +194,7 @@ export default {
 .districts {
   max-height: 0;
   overflow: hidden;
+  color: $color_blackLight;
   transition: max-height 500ms;
 }
 .districts ul{
