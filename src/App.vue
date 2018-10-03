@@ -24,6 +24,14 @@ export default {
       OneSignal.init({
         appId: '7945e8d5-d196-43af-bca1-b3d0b6224b96',
       });
+      OneSignal.on('subscriptionChange', (isSubscribed) => {
+        console.log('The user subscription state is now:', isSubscribed);
+        OneSignal.push(() => {
+          OneSignal.getUserId((userId) => {
+            console.log('OneSignal User ID:', userId);
+          });
+        });
+      });
     });
   },
 };
