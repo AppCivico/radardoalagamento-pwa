@@ -22,9 +22,10 @@ export default {
     const OneSignal = window.OneSignal || [];
     OneSignal.push(() => {
       OneSignal.on('subscriptionChange', (isSubscribed) => {
-        console.info('The users subscription state is now:', isSubscribed);
+        console.log('The users subscription state is now:', isSubscribed);
         OneSignal.push(() => {
           OneSignal.getUserId((userId) => {
+            console.log('OneSignal User ID:', userId);
             this.$store.commit('SET_ONESIGNAL_USER_ID', userId);
           });
         });
