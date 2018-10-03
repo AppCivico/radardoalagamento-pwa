@@ -17,25 +17,6 @@
     <!-- <script charset="UTF&#45;8" src="//cdn.sendpulse.com/js/push/01e3323da048bfc1d69b8ef095c29b93_1.js" async></script> -->
     <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
     <script src="<%= BASE_URL %>sp-push-worker.js" async></script>
-    <script charset="utf-8">
-      const OneSignal = window.OneSignal || [];
-
-      OneSignal.push(() => {
-        OneSignal.on('subscriptionChange', (isSubscribed) => {
-          console.log("The user's subscription state is now:", isSubscribed);
-          OneSignal.push(() => {
-            OneSignal.getUserId((userId) => {
-              console.log('OneSignal User ID:', userId);
-              this.$store.commit('SET_ONESIGNAL_USER_ID', userId);
-            });
-          });
-        });
-
-        OneSignal.init({
-          appId: '7945e8d5-d196-43af-bca1-b3d0b6224b96',
-        });
-      });
-    </script>
     <!-- built files will be auto injected -->
   </body>
 </html>
