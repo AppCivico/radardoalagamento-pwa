@@ -25,7 +25,7 @@ export default {
         console.info('The users subscription state is now:', isSubscribed);
         OneSignal.push(() => {
           OneSignal.getUserId((userId) => {
-            this.$store.commit('SET_ONESIGNAL_USER_ID', userId);
+            this.$store.dispatch('SET_ONESIGNAL_USER_ID', userId);
           });
         });
       });
