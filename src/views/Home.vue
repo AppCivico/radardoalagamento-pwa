@@ -31,17 +31,16 @@ export default {
     if (from.name !== null) {
       next((vm) => {
         console.log('this1', this);
-
-        this.status = 'show';
+        vm.status = 'show';
       });
       return;
     } else {
       next((vm) => {
         console.log('this2', this);
         if (window.matchMedia('(display-mode: standalone)').matches) {
-          this.status = 'hide';
+          vm.status = 'hide';
         } else {
-          this.status = 'show';
+          vm.status = 'show';
         }
       });
     }

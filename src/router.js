@@ -20,11 +20,6 @@ export default new Router({
       component: Districts,
     },
     {
-      path: '/districts',
-      name: 'Meus distritos',
-      component: Districts,
-    },
-    {
       path: '/profile',
       name: 'Perfil',
       component: Profile,
@@ -36,7 +31,7 @@ export default new Router({
     },
     {
       path: '/options',
-      name: 'Ajuda',
+      name: 'Opções',
       component: () => import('./views/Options.vue'),
     },
     {
