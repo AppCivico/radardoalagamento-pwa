@@ -21,15 +21,16 @@ export default {
 
       OneSignal.init({
         appId: '7945e8d5-d196-43af-bca1-b3d0b6224b96',
+        // appId: '926039b6-92fb-4516-8bed-bbe89166861e',
         allowLocalhostAsSecureOrigin: true,
         autoRegister: false,
         welcomeNotification: {
           disable: true,
         },
-      });
+      }).then(() => {
+        OneSignal.showHttpPrompt()
+      })
     });
-
-    OneSignal.showHttpPrompt()
   },
 
   mounted() {
