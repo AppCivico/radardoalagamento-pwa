@@ -22,8 +22,14 @@ export default {
       OneSignal.init({
         appId: '7945e8d5-d196-43af-bca1-b3d0b6224b96',
         allowLocalhostAsSecureOrigin: true,
+        autoRegister: false,
+        welcomeNotification: {
+          disable: true,
+        },
       });
     });
+
+    OneSignal.showHttpPrompt()
   },
 
   mounted() {
