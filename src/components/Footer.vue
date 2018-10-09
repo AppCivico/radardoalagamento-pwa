@@ -55,6 +55,7 @@ export default {
   box-shadow: 0 0 24px 0 rgba(0, 0, 0, 0.24), 0 0 24px 0 rgba(0, 0, 0, 0.12);
   max-width: 768px;
   transform: translate(-50%, 0);
+  z-index: 2;
 }
 .footer__nav ul {
   list-style: none;
