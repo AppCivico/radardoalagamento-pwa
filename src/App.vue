@@ -27,6 +27,14 @@ export default {
         welcomeNotification: {
           disable: true,
         },
+        promptOptions: {
+          /* actionMessage limited to 90 characters */
+          actionMessage: 'Gostaria de ativar as notificações do Radar do Alagamento?',
+          /* acceptButtonText limited to 15 characters */
+          acceptButtonText: 'Sim',
+          /* cancelButtonText limited to 15 characters */
+          cancelButtonText: 'Não'
+        },
       }).then(() => {
         OneSignal.showHttpPrompt()
       })
