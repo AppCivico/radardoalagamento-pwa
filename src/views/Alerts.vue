@@ -7,25 +7,31 @@
         <li @click="changeType('city')" :class="this.type === 'city' ? 'active' : ''">Alertas da cidade</li>
       </ul>
       <a class="alerts_new-alert" href="#" @click.prevent="$router.push('/new-alert')">Enviar um alerta</a>
-      <ul class="alerts__list" v-if="selectedAlerts.length > 0">
-        <li class="alerts__item" v-for="alert in selectedAlerts" :key="alert.id">
-          <span class="alert__time">{{ formatDate(alert.created_at) }}</span>
-          <div class="alert__content">
-            <div :class="`alert__level ${alert.level}`">Nível {{ alert.level }}</div>
-            <div class="alert__description">
-              <h3>{{ alert.description }}</h3>
-              <h4>Distritos alertados:</h4>
-              <span v-for="(district, index) in alert.alert_districts" :key="district.district_id">
-                {{ district.district.name }}{{ index !==  alert.alert_districts.length - 1 ? ',' : ''}}
-              </span>
-            </div>
-          </div>
-        </li>
-      </ul>
-      <div v-else class="alerts__empty">
-        <img src="../assets/images/wink.png" alt="Emoji feliz">
-        <h2>Tudo tranquilo, sem alertas nos distritos seguidos</h2>
+
+      <div class="main-loader" v-if="loading">
+        <strong class="main-loader__loader">Carregando</strong>
       </div>
+      <template v-else>
+        <ul class="alerts__list" v-if="selectedAlerts.length > 0">
+          <li class="alerts__item" v-for="alert in selectedAlerts" :key="alert.id">
+            <span class="alert__time">{{ formatDate(alert.created_at) }}</span>
+            <div class="alert__content">
+              <div :class="`alert__level ${alert.level}`">Nível {{ alert.level }}</div>
+              <div class="alert__description">
+                <h3>{{ alert.description }}</h3>
+                <h4>Distritos alertados:</h4>
+                <span v-for="(district, index) in alert.alert_districts" :key="district.district_id">
+                  {{ district.district.name }}{{ index !==  alert.alert_districts.length - 1 ? ',' : ''}}
+                </span>
+              </div>
+            </div>
+          </li>
+        </ul>
+        <div v-else class="alerts__empty">
+          <img src="../assets/images/wink.png" alt="Emoji feliz">
+          <h2>Tudo tranquilo, sem alertas nos distritos seguidos</h2>
+        </div>
+      </template>
     </section>
     <Footer />
   </main>
@@ -65,6 +71,7 @@ export default {
       userType: '',
       selectedAlerts: [],
       type: 'me',
+      loading: false,
     };
   },
   computed: {
@@ -116,28 +123,34 @@ export default {
       this.$store.dispatch(type)
         .then(() => {
           if (type === 'GET_ALERTS') {
-            this.selectedAlerts = this.alerts;
+            return this.selectedAlerts = this.alerts;
           } else {
-            this.selectedAlerts = this.alertsCity;
+            return this.selectedAlerts = this.alertsCity;
           }
+        })
+        .then(() => {
+          this.loading = false;
         })
         .catch(() => {
           swal('Ocorreu um erro ao carregar os alertas, recarregue a página.')
         });
     },
     changeType(type) {
+      this.loading = true;
       this.type = type;
       if (type === 'me') {
         if (this.alerts.length < 1) {
-          this.loadAlerts('GET_ALERTS');
+          this.loadAlerts('GET_ALERTS')
         } else {
           this.selectedAlerts = this.alerts;
+          this.loading = false;
         }
       } else {
         if (this.alertsCity.length < 1) {
           this.loadAlerts('GET_ALERTS_CITY');
         } else {
           this.selectedAlerts = this.alertsCity;
+          this.loading = false;
         }
       }
     }
@@ -254,5 +267,40 @@ export default {
   font-weight: 300;
   padding: $gutter / 2 $gutter;
 }
+
+.main-loader {
+  display: flex;
+  justify-content: center;
+
+  .main-loader__loader {
+    display: inline-block;
+    width: 64px;
+    height: 64px;
+    text-indent: -999em;
+  }
+
+  .main-loader__loader:after {
+    content: ' ';
+    display: block;
+    width: 46px;
+    height: 46px;
+    margin: 1px;
+    border-radius: 50%;
+    border: 5px solid	$color_blueDark;
+    border-color: $color_blueDark transparent $color_blueDark transparent;
+    animation: lds-dual-ring 1.2s linear infinite;
+  }
+
+  @keyframes lds-dual-ring {
+    0% {
+      transform: rotate(0deg);
+    }
+
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+}
+
 </style>
 
