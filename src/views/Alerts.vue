@@ -42,6 +42,9 @@ export default {
     Header,
     Footer,
   },
+  updated() {
+    this.checkType();
+  },
   mounted() {
     this.checkUser();
     setTimeout(() => {
@@ -101,6 +104,12 @@ export default {
     checkUser() {
       if (localStorage.getItem('rdalgus') !== null) {
         this.userType = 'registered';
+      }
+    },
+    checkType() {
+      const type = this.$route.query.type
+      if (type) {
+        this.changeType(type)
       }
     },
     loadAlerts(type) {

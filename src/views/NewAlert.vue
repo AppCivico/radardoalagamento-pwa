@@ -141,6 +141,10 @@ export default {
           .then(() => {
             swal('Alerta enviado com sucesso!');
           })
+          .then(() => {
+            this.$router.push('alerts');
+            this.$router.push({ name: 'Alertas', query: { type: 'city' } });
+          })
           .catch(() => {
             swal('Ocorreu um erro durante o envio, tente novamente.');
           });
