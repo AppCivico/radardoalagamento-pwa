@@ -4,8 +4,6 @@
     <section id="options">
       <nav>
         <ul class="options__menu options__menu-clean">
-          <li><router-link to="/terms">Termos de Serviço</router-link></li>
-          <li><router-link to="/privacy">Política de Privacidade</router-link></li>
           <li><a href="#" @click.prevent="reportProblem">Reportar problema</a></li>
           <li><a href="#" @click.prevent="showAbout">Sobre</a></li>
         </ul>
