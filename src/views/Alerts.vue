@@ -48,8 +48,10 @@ export default {
     Header,
     Footer,
   },
-  updated() {
-    this.checkType();
+  watch: {
+    $route() {
+    	this.checkType();
+    },
   },
   mounted() {
     this.checkUser();
@@ -57,7 +59,7 @@ export default {
       if (this.userType === 'registered') {
         this.loadAlerts('GET_ALERTS');
         if (this.selectedDistricts.length <= 0) {
-          swal('Você precisa selecionar os distritos que quer seguir ;)')
+          swal('Você precisa selecionar os distritos que quer seguir ;)');
           this.$router.push('/districts');
         }
       } else {
@@ -114,9 +116,9 @@ export default {
       }
     },
     checkType() {
-      const type = this.$route.query.type
+      const type = this.$route.query.type;
       if (type) {
-        this.changeType(type)
+        this.changeType(type);
       }
     },
     loadAlerts(type) {
@@ -124,15 +126,14 @@ export default {
         .then(() => {
           if (type === 'GET_ALERTS') {
             return this.selectedAlerts = this.alerts;
-          } else {
-            return this.selectedAlerts = this.alertsCity;
           }
+          	return this.selectedAlerts = this.alertsCity;
         })
         .then(() => {
           this.loading = false;
         })
         .catch(() => {
-          swal('Ocorreu um erro ao carregar os alertas, recarregue a página.')
+          swal('Ocorreu um erro ao carregar os alertas, recarregue a página.');
         });
     },
     changeType(type) {
@@ -140,22 +141,20 @@ export default {
       this.type = type;
       if (type === 'me') {
         if (this.alerts.length < 1) {
-          this.loadAlerts('GET_ALERTS')
+          this.loadAlerts('GET_ALERTS');
         } else {
           this.selectedAlerts = this.alerts;
           this.loading = false;
         }
+      } else if (this.alertsCity.length < 1) {
+        this.loadAlerts('GET_ALERTS_CITY');
       } else {
-        if (this.alertsCity.length < 1) {
-          this.loadAlerts('GET_ALERTS_CITY');
-        } else {
-          this.selectedAlerts = this.alertsCity;
-          this.loading = false;
-        }
+        this.selectedAlerts = this.alertsCity;
+        this.loading = false;
       }
-    }
-  }
-}
+    },
+  },
+};
 </script>
 
 <style lang="scss">
