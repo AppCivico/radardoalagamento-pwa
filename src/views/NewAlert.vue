@@ -100,7 +100,11 @@ export default {
         this.lng = place.geometry.location.lng();
         this.map.panTo(place.geometry.location);
         this.map.setZoom(15);
-        this.marker = new google.maps.Marker({position: place.geometry.location, map: this.map});
+        var position = {
+          lat: this.lat,
+          lng: this.lng,
+        };
+        this.marker.setPosition(position);
       } else {
         swal('Localização não encontrada');
       }
@@ -112,20 +116,21 @@ export default {
     },
     useGeolocation() {
       if ('geolocation' in navigator) {
+        var input = document.getElementById('searchTextField');
+        input.value = 'Carregando localização...';
+
         navigator.geolocation.getCurrentPosition((location) => {
           this.lat = location.coords.latitude;
           this.lng = location.coords.longitude;
-          var input = document.getElementById('searchTextField');
           var geocoder = new google.maps.Geocoder;
           var position = {
             lat: location.coords.latitude,
             lng: location.coords.longitude,
           };
-
           this.map.setCenter(position);
           this.marker.setPosition(position);
 
-          geocoder.geocode({location: position}, (results, status) => {
+          geocoder.geocode({ location: position }, (results, status) => {
             if (status === 'OK') {
               if (results[0]) {
                 input.value = results[0].formatted_address;
