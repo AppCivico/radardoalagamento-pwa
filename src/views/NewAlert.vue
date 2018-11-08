@@ -115,6 +115,8 @@ export default {
         navigator.geolocation.getCurrentPosition((location) => {
           this.lat = location.coords.latitude;
           this.lng = location.coords.longitude;
+          var input = document.getElementById('searchTextField');
+          var geocoder = new google.maps.Geocoder;
           var position = {
             lat: location.coords.latitude,
             lng: location.coords.longitude,
@@ -122,6 +124,18 @@ export default {
 
           this.map.setCenter(position);
           this.marker.setPosition(position);
+
+          geocoder.geocode({location: position}, (results, status) => {
+            if (status === 'OK') {
+              if (results[0]) {
+                input.value = results[0].formatted_address;
+              } else {
+                console.error('No results found');
+              }
+            } else {
+              console.error('Geocoder failed due to: ' + status);
+            }
+          });
         });
       } else {
         swal('Ops! Seu navegador não suporta geolocalização, utilize o mapa');
