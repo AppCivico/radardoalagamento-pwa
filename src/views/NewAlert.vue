@@ -121,7 +121,7 @@ export default {
           };
 
           this.map.setCenter(position);
-          this.marker = new google.maps.Marker({position, map: this.map});
+          this.marker.setPosition(position);
         });
       } else {
         swal('Ops! Seu navegador não suporta geolocalização, utilize o mapa');
